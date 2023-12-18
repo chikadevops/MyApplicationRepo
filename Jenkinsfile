@@ -32,13 +32,13 @@ pipeline {
         
         stage('Nexus Upload') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'MyWebApp', classifier: '', file: 'MyWebApp/target/MyWebApp.war', type: 'war']], credentialsId: '897de581-aca3-4f9f-bb8b-a7175d56be2b', groupId: 'MyWebApp', nexusUrl: 'ec2-54-91-130-9.compute-1.amazonaws.com:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'MyWebApp', classifier: '', file: 'MyWebApp/target/MyWebApp.war', type: 'war']], credentialsId: '897de581-aca3-4f9f-bb8b-a7175d56be2b', groupId: 'MyWebApp', nexusUrl: 'ec2-18-205-160-98.compute-1.amazonaws.com:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
             }
         }
         
         stage('DEV Deploy') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'c43d606a-b19e-4ff6-99e8-af1561b3cea4', path: '', url: 'http://ec2-3-94-173-179.compute-1.amazonaws.com:8080/')], contextPath: null, war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'c43d606a-b19e-4ff6-99e8-af1561b3cea4', path: '', url: 'http://ec2-3-84-82-204.compute-1.amazonaws.com:8080/')], contextPath: null, war: '**/*.war'
             }
         }
         
@@ -61,7 +61,7 @@ pipeline {
         stage('QA Deploy') {
             steps {
                 echo "deploying to QA Env "
-                deploy adapters: [tomcat9(credentialsId: 'c43d606a-b19e-4ff6-99e8-af1561b3cea4', path: '', url: 'http://ec2-3-94-173-179.compute-1.amazonaws.com:8080/')], contextPath: null, war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'c43d606a-b19e-4ff6-99e8-af1561b3cea4', path: '', url: 'http://ec2-3-84-82-204.compute-1.amazonaws.com:8080/')], contextPath: null, war: '**/*.war'
             }
         }
         
